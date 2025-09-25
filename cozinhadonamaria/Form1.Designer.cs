@@ -33,26 +33,21 @@ namespace cozinhadonamaria
             btnReceita = new Button();
             btnConsultaReceita = new Button();
             btnVideoReceita = new Button();
-
             tlpRoot = new TableLayoutPanel();
             tlpCenter = new TableLayoutPanel();
             flwMenu = new FlowLayoutPanel();
-
             SuspendLayout();
-
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 250, 252);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cozinha da Dona Maria";
             MinimumSize = new Size(800, 500);
             ClientSize = new Size(900, 600);
-
             tlpRoot.Dock = DockStyle.Fill;
             tlpRoot.ColumnCount = 1;
             tlpRoot.RowCount = 1;
             tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             Controls.Add(tlpRoot);
-
             tlpCenter.Dock = DockStyle.Fill;
             tlpCenter.ColumnCount = 3;
             tlpCenter.RowCount = 3;
@@ -63,7 +58,6 @@ namespace cozinhadonamaria
             tlpCenter.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             tlpCenter.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpRoot.Controls.Add(tlpCenter, 0, 0);
-
             flwMenu.FlowDirection = FlowDirection.TopDown;
             flwMenu.WrapContents = false;
             flwMenu.AutoSize = true;
@@ -72,45 +66,61 @@ namespace cozinhadonamaria
             flwMenu.BackColor = Color.FromArgb(235, 244, 252);
             flwMenu.BorderStyle = BorderStyle.None;
             tlpCenter.Controls.Add(flwMenu, 1, 1);
-
-            void EstilizarBotao(Button b, Color back, Color fore)
-            {
-                b.Width = 260;
-                b.Height = 46;
-                b.Margin = new Padding(12);
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
-                b.BackColor = back;
-                b.ForeColor = fore;
-                b.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
-            }
-
             btnIngrediente.Name = "btnIngrediente";
             btnIngrediente.Text = "Cadastrar Ingrediente";
-            EstilizarBotao(btnIngrediente, Color.FromArgb(100, 181, 246), Color.White);
-
+            btnIngrediente.Width = 260;
+            btnIngrediente.Height = 46;
+            btnIngrediente.Margin = new Padding(12);
+            btnIngrediente.FlatStyle = FlatStyle.Flat;
+            btnIngrediente.FlatAppearance.BorderSize = 0;
+            btnIngrediente.BackColor = Color.FromArgb(100, 181, 246);
+            btnIngrediente.ForeColor = Color.White;
+            btnIngrediente.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             btnTipoCozinha.Name = "btnTipoCozinha";
             btnTipoCozinha.Text = "Tipo de Cozinha";
-            EstilizarBotao(btnTipoCozinha, Color.FromArgb(255, 213, 79), Color.Black);
-
+            btnTipoCozinha.Width = 260;
+            btnTipoCozinha.Height = 46;
+            btnTipoCozinha.Margin = new Padding(12);
+            btnTipoCozinha.FlatStyle = FlatStyle.Flat;
+            btnTipoCozinha.FlatAppearance.BorderSize = 0;
+            btnTipoCozinha.BackColor = Color.FromArgb(255, 213, 79);
+            btnTipoCozinha.ForeColor = Color.Black;
+            btnTipoCozinha.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             btnReceita.Name = "btnReceita";
             btnReceita.Text = "Cadastrar Receita";
-            EstilizarBotao(btnReceita, Color.FromArgb(129, 199, 132), Color.White);
-
+            btnReceita.Width = 260;
+            btnReceita.Height = 46;
+            btnReceita.Margin = new Padding(12);
+            btnReceita.FlatStyle = FlatStyle.Flat;
+            btnReceita.FlatAppearance.BorderSize = 0;
+            btnReceita.BackColor = Color.FromArgb(129, 199, 132);
+            btnReceita.ForeColor = Color.White;
+            btnReceita.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             btnConsultaReceita.Name = "btnConsultaReceita";
             btnConsultaReceita.Text = "Consultar Receita";
-            EstilizarBotao(btnConsultaReceita, Color.FromArgb(186, 104, 200), Color.White);
-
+            btnConsultaReceita.Width = 260;
+            btnConsultaReceita.Height = 46;
+            btnConsultaReceita.Margin = new Padding(12);
+            btnConsultaReceita.FlatStyle = FlatStyle.Flat;
+            btnConsultaReceita.FlatAppearance.BorderSize = 0;
+            btnConsultaReceita.BackColor = Color.FromArgb(186, 104, 200);
+            btnConsultaReceita.ForeColor = Color.White;
+            btnConsultaReceita.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             btnVideoReceita.Name = "btnVideoReceita";
             btnVideoReceita.Text = "Vídeos de Receita";
-            EstilizarBotao(btnVideoReceita, Color.FromArgb(255, 138, 101), Color.White);
-
+            btnVideoReceita.Width = 260;
+            btnVideoReceita.Height = 46;
+            btnVideoReceita.Margin = new Padding(12);
+            btnVideoReceita.FlatStyle = FlatStyle.Flat;
+            btnVideoReceita.FlatAppearance.BorderSize = 0;
+            btnVideoReceita.BackColor = Color.FromArgb(255, 138, 101);
+            btnVideoReceita.ForeColor = Color.White;
+            btnVideoReceita.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             flwMenu.Controls.Add(btnIngrediente);
             flwMenu.Controls.Add(btnTipoCozinha);
             flwMenu.Controls.Add(btnReceita);
             flwMenu.Controls.Add(btnConsultaReceita);
             flwMenu.Controls.Add(btnVideoReceita);
-
             Name = "Form1";
             ResumeLayout(false);
         }

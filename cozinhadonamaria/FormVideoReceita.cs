@@ -11,7 +11,7 @@ namespace cozinhadonamaria
         private ComboBox cmbReceitas = new();
         private Button btnBuscar = new();
         private WebView2 web = new();
-        private FlowLayoutPanel barra = new();
+        private TableLayoutPanel barra = new();
 
         public FormVideoReceita()
         {
@@ -21,25 +21,31 @@ namespace cozinhadonamaria
             StartPosition = FormStartPosition.CenterScreen;
 
             barra.Dock = DockStyle.Top;
-            barra.Height = 60;
-            barra.Padding = new Padding(12, 10, 12, 8);
-            barra.FlowDirection = FlowDirection.LeftToRight;
-            barra.WrapContents = false;
-            barra.AutoSize = false;
+            barra.AutoSize = true;
+            barra.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            barra.Padding = new Padding(12, 10, 12, 10);
+            barra.ColumnCount = 2;
+            barra.RowCount = 1;
+            barra.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            barra.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            barra.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             cmbReceitas.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbReceitas.Width = 420;
             cmbReceitas.Margin = new Padding(0, 0, 12, 0);
             cmbReceitas.Height = 36;
+            cmbReceitas.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cmbReceitas.Width = 400; // largura inicial, depois será ajustada pelo layout
             AtualizarListaReceitas();
-            barra.Controls.Add(cmbReceitas);
 
             btnBuscar.Text = "Buscar no YouTube";
-            btnBuscar.Width = 170;
+            btnBuscar.AutoSize = true;
             btnBuscar.Height = 36;
             btnBuscar.Margin = new Padding(0);
+            btnBuscar.Anchor = AnchorStyles.Right | AnchorStyles.Top;
             btnBuscar.Click += BtnBuscar_Click;
-            barra.Controls.Add(btnBuscar);
+
+            barra.Controls.Add(cmbReceitas, 0, 0);
+            barra.Controls.Add(btnBuscar, 1, 0);
 
             web.Dock = DockStyle.Fill;
 
@@ -61,13 +67,6 @@ namespace cozinhadonamaria
 
         private void InitializeComponent()
         {
-            SuspendLayout();
-            // 
-            // FormVideoReceita
-            // 
-            ClientSize = new Size(964, 531);
-            Name = "FormVideoReceita";
-            ResumeLayout(false);
         }
 
         private async void BtnBuscar_Click(object? sender, EventArgs e)

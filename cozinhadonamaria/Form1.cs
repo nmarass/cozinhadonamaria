@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace cozinhadonamaria
@@ -8,6 +9,9 @@ namespace cozinhadonamaria
         public Form1()
         {
             InitializeComponent();
+
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
 
             btnIngrediente.Click += BtnIngrediente_Click;
             btnTipoCozinha.Click += BtnTipoCozinha_Click;
