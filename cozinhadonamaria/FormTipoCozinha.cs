@@ -53,32 +53,4 @@ namespace cozinhadonamaria
         public static List<Ingrediente> Ingredientes { get; } = new();
         public static List<Receita> Receitas { get; } = new();
     }
-
-    public partial class FormIngrediente : Form
-    {
-        private void BtnSalvar_Click(object sender, EventArgs e)
-        {
-            var nome = txtNome.Text.Trim();
-            var unidade = cmbUnidade.Text;
-            var quantidade = numQuantidade.Value;
-
-            if (!string.IsNullOrEmpty(nome))
-            {
-                DataStore.Ingredientes.Add(new Ingrediente
-                {
-                    Nome = nome,
-                    Unidade = unidade,
-                    Quantidade = quantidade
-                });
-                MessageBox.Show("Ingrediente salvo com sucesso!");
-                txtNome.Clear();
-                numQuantidade.Value = 0;
-                cmbUnidade.SelectedIndex = -1;
-            }
-            else
-            {
-                MessageBox.Show("Informe um nome válido para o ingrediente.");
-            }
-        }
-    }
 }

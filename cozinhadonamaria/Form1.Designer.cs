@@ -1,89 +1,111 @@
-﻿namespace cozinhadonamaria
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace cozinhadonamaria
 {
     partial class Form1
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
         private Button btnIngrediente;
         private Button btnTipoCozinha;
         private Button btnReceita;
         private Button btnConsultaReceita;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private TableLayoutPanel tlpRoot;
+        private TableLayoutPanel tlpCenter;
+        private FlowLayoutPanel flwMenu;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.btnIngrediente = new Button();
-            this.btnTipoCozinha = new Button();
-            this.btnReceita = new Button();
-            this.btnConsultaReceita = new Button();
-            this.SuspendLayout();
-            // 
-            // btnIngrediente
-            // 
-            this.btnIngrediente.Location = new System.Drawing.Point(30, 30);
-            this.btnIngrediente.Name = "btnIngrediente";
-            this.btnIngrediente.Size = new System.Drawing.Size(200, 40);
-            this.btnIngrediente.Text = "Cadastrar Ingrediente";
-            this.btnIngrediente.UseVisualStyleBackColor = true;
-            // 
-            // btnTipoCozinha
-            // 
-            this.btnTipoCozinha.Location = new System.Drawing.Point(30, 80);
-            this.btnTipoCozinha.Name = "btnTipoCozinha";
-            this.btnTipoCozinha.Size = new System.Drawing.Size(200, 40);
-            this.btnTipoCozinha.Text = "Tipo de Cozinha";
-            this.btnTipoCozinha.UseVisualStyleBackColor = true;
-            // 
-            // btnReceita
-            // 
-            this.btnReceita.Location = new System.Drawing.Point(30, 130);
-            this.btnReceita.Name = "btnReceita";
-            this.btnReceita.Size = new System.Drawing.Size(200, 40);
-            this.btnReceita.Text = "Cadastrar Receita";
-            this.btnReceita.UseVisualStyleBackColor = true;
-            // 
-            // btnConsultaReceita
-            // 
-            this.btnConsultaReceita.Location = new System.Drawing.Point(30, 180);
-            this.btnConsultaReceita.Name = "btnConsultaReceita";
-            this.btnConsultaReceita.Size = new System.Drawing.Size(200, 40);
-            this.btnConsultaReceita.Text = "Consultar Receita";
-            this.btnConsultaReceita.UseVisualStyleBackColor = true;
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnIngrediente);
-            this.Controls.Add(this.btnTipoCozinha);
-            this.Controls.Add(this.btnReceita);
-            this.Controls.Add(this.btnConsultaReceita);
-            this.Name = "Form1";
-            this.Text = "Cozinha da Dona Maria";
-            this.ResumeLayout(false);
-        }
+            components = new Container();
+            btnIngrediente = new Button();
+            btnTipoCozinha = new Button();
+            btnReceita = new Button();
+            btnConsultaReceita = new Button();
 
-        #endregion
+            tlpRoot = new TableLayoutPanel();
+            tlpCenter = new TableLayoutPanel();
+            flwMenu = new FlowLayoutPanel();
+
+            SuspendLayout();
+
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(247, 250, 252);
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Cozinha da Dona Maria";
+            MinimumSize = new Size(800, 500);
+            ClientSize = new Size(900, 600);
+
+            tlpRoot.Dock = DockStyle.Fill;
+            tlpRoot.ColumnCount = 1;
+            tlpRoot.RowCount = 1;
+            tlpRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            Controls.Add(tlpRoot);
+
+            tlpCenter.Dock = DockStyle.Fill;
+            tlpCenter.ColumnCount = 3;
+            tlpCenter.RowCount = 3;
+            tlpCenter.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpCenter.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            tlpCenter.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpCenter.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpCenter.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            tlpCenter.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpRoot.Controls.Add(tlpCenter, 0, 0);
+
+            flwMenu.FlowDirection = FlowDirection.TopDown;
+            flwMenu.WrapContents = false;
+            flwMenu.AutoSize = true;
+            flwMenu.Padding = new Padding(12);
+            flwMenu.Margin = new Padding(12);
+            flwMenu.BackColor = Color.FromArgb(235, 244, 252);
+            flwMenu.BorderStyle = BorderStyle.None;
+            tlpCenter.Controls.Add(flwMenu, 1, 1);
+
+            void EstilizarBotao(Button b, Color back, Color fore)
+            {
+                b.Width = 260;
+                b.Height = 46;
+                b.Margin = new Padding(12);
+                b.FlatStyle = FlatStyle.Flat;
+                b.FlatAppearance.BorderSize = 0;
+                b.BackColor = back;
+                b.ForeColor = fore;
+                b.Font = new Font(new FontFamily("Segoe UI"), 10.5F, FontStyle.Bold, GraphicsUnit.Point);
+            }
+
+            btnIngrediente.Name = "btnIngrediente";
+            btnIngrediente.Text = "Cadastrar Ingrediente";
+            EstilizarBotao(btnIngrediente, Color.FromArgb(100, 181, 246), Color.White);
+
+            btnTipoCozinha.Name = "btnTipoCozinha";
+            btnTipoCozinha.Text = "Tipo de Cozinha";
+            EstilizarBotao(btnTipoCozinha, Color.FromArgb(255, 213, 79), Color.Black);
+
+            btnReceita.Name = "btnReceita";
+            btnReceita.Text = "Cadastrar Receita";
+            EstilizarBotao(btnReceita, Color.FromArgb(129, 199, 132), Color.White);
+
+            btnConsultaReceita.Name = "btnConsultaReceita";
+            btnConsultaReceita.Text = "Consultar Receita";
+            EstilizarBotao(btnConsultaReceita, Color.FromArgb(186, 104, 200), Color.White);
+
+            flwMenu.Controls.Add(btnIngrediente);
+            flwMenu.Controls.Add(btnTipoCozinha);
+            flwMenu.Controls.Add(btnReceita);
+            flwMenu.Controls.Add(btnConsultaReceita);
+
+            Name = "Form1";
+            ResumeLayout(false);
+        }
     }
 }

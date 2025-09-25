@@ -1,3 +1,8 @@
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace cozinhadonamaria
 {
     partial class FormTipoCozinha
