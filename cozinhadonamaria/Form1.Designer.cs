@@ -12,6 +12,7 @@ namespace cozinhadonamaria
         private Button btnTipoCozinha;
         private Button btnReceita;
         private Button btnConsultaReceita;
+        private Button btnVideoReceita;
 
         private TableLayoutPanel tlpRoot;
         private TableLayoutPanel tlpCenter;
@@ -31,6 +32,7 @@ namespace cozinhadonamaria
             btnTipoCozinha = new Button();
             btnReceita = new Button();
             btnConsultaReceita = new Button();
+            btnVideoReceita = new Button();
 
             tlpRoot = new TableLayoutPanel();
             tlpCenter = new TableLayoutPanel();
@@ -99,10 +101,15 @@ namespace cozinhadonamaria
             btnConsultaReceita.Text = "Consultar Receita";
             EstilizarBotao(btnConsultaReceita, Color.FromArgb(186, 104, 200), Color.White);
 
+            btnVideoReceita.Name = "btnVideoReceita";
+            btnVideoReceita.Text = "Vídeos de Receita";
+            EstilizarBotao(btnVideoReceita, Color.FromArgb(255, 138, 101), Color.White);
+
             flwMenu.Controls.Add(btnIngrediente);
             flwMenu.Controls.Add(btnTipoCozinha);
             flwMenu.Controls.Add(btnReceita);
             flwMenu.Controls.Add(btnConsultaReceita);
+            flwMenu.Controls.Add(btnVideoReceita);
 
             Name = "Form1";
             ResumeLayout(false);

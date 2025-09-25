@@ -12,6 +12,8 @@ namespace cozinhadonamaria
         private ComboBox cmbTipoCozinha;
         private Button btnAdicionarIngrediente;
         private Button btnSalvarReceita;
+        private Button btnEditarReceita;
+        private Button btnExcluirReceita;
         private DataGridView dgvIngredientes;
 
         private TableLayoutPanel tlpRoot;
@@ -27,6 +29,8 @@ namespace cozinhadonamaria
             cmbTipoCozinha = new ComboBox();
             btnAdicionarIngrediente = new Button();
             btnSalvarReceita = new Button();
+            btnEditarReceita = new Button();
+            btnExcluirReceita = new Button();
             dgvIngredientes = new DataGridView();
 
             tlpRoot = new TableLayoutPanel();
@@ -82,14 +86,34 @@ namespace cozinhadonamaria
             flwBotoes.FlowDirection = FlowDirection.RightToLeft;
 
             btnSalvarReceita.Name = "btnSalvarReceita";
-            btnSalvarReceita.Text = "Salvar Receita";
-            btnSalvarReceita.Width = 150;
+            btnSalvarReceita.Text = "Salvar";
+            btnSalvarReceita.Width = 120;
             btnSalvarReceita.Height = 38;
             btnSalvarReceita.Margin = new Padding(8);
             btnSalvarReceita.FlatStyle = FlatStyle.Flat;
             btnSalvarReceita.FlatAppearance.BorderSize = 0;
             btnSalvarReceita.BackColor = Color.FromArgb(76, 175, 80);
             btnSalvarReceita.ForeColor = Color.White;
+
+            btnEditarReceita.Name = "btnEditarReceita";
+            btnEditarReceita.Text = "Editar";
+            btnEditarReceita.Width = 120;
+            btnEditarReceita.Height = 38;
+            btnEditarReceita.Margin = new Padding(8);
+            btnEditarReceita.FlatStyle = FlatStyle.Flat;
+            btnEditarReceita.FlatAppearance.BorderSize = 0;
+            btnEditarReceita.BackColor = Color.FromArgb(255, 202, 40);
+            btnEditarReceita.ForeColor = Color.Black;
+
+            btnExcluirReceita.Name = "btnExcluirReceita";
+            btnExcluirReceita.Text = "Excluir";
+            btnExcluirReceita.Width = 120;
+            btnExcluirReceita.Height = 38;
+            btnExcluirReceita.Margin = new Padding(8);
+            btnExcluirReceita.FlatStyle = FlatStyle.Flat;
+            btnExcluirReceita.FlatAppearance.BorderSize = 0;
+            btnExcluirReceita.BackColor = Color.FromArgb(239, 83, 80);
+            btnExcluirReceita.ForeColor = Color.White;
 
             btnAdicionarIngrediente.Name = "btnAdicionarIngrediente";
             btnAdicionarIngrediente.Text = "Adicionar Ingrediente";
@@ -121,6 +145,8 @@ namespace cozinhadonamaria
             flwCampos.Controls.Add(cmbTipoCozinha);
 
             flwBotoes.Controls.Add(btnSalvarReceita);
+            flwBotoes.Controls.Add(btnEditarReceita);
+            flwBotoes.Controls.Add(btnExcluirReceita);
             flwBotoes.Controls.Add(btnAdicionarIngrediente);
 
             tlpRoot.Controls.Add(flwCampos, 0, 0);

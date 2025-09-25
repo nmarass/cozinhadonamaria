@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace cozinhadonamaria
@@ -8,6 +9,7 @@ namespace cozinhadonamaria
     {
         private string tipoCozinhaSelecionado = string.Empty;
         private List<Ingrediente> ingredientesReceita = new();
+        private Receita? receitaEmEdicao = null;
 
         public FormReceita(string tipoCozinha)
         {
@@ -27,6 +29,8 @@ namespace cozinhadonamaria
             ConfigurarGrid();
             btnAdicionarIngrediente.Click += BtnAdicionarIngrediente_Click;
             btnSalvarReceita.Click += BtnSalvarReceita_Click;
+            if (btnEditarReceita != null) btnEditarReceita.Click += BtnEditarReceita_Click;
+            if (btnExcluirReceita != null) btnExcluirReceita.Click += BtnExcluirReceita_Click;
             AtualizarTiposCozinha();
             this.Activated += (_, __) => AtualizarTiposCozinha();
         }
@@ -88,7 +92,20 @@ namespace cozinhadonamaria
             var nome = txtNomeReceita.Text.Trim();
             var tipo = cmbTipoCozinha.Text;
 
-            if (!string.IsNullOrEmpty(nome) && !string.IsNullOrEmpty(tipo) && ingredientesReceita.Count > 0)
+            if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(tipo) || ingredientesReceita.Count == 0)
+            {
+                MessageBox.Show("Preencha todos os campos e adicione pelo menos um ingrediente.");
+                return;
+            }
+
+            if (receitaEmEdicao != null)
+            {
+                receitaEmEdicao.Nome = nome;
+                receitaEmEdicao.TipoCozinha = tipo;
+                receitaEmEdicao.Ingredientes = ingredientesReceita.Select(i => new Ingrediente { Nome = i.Nome, Quantidade = i.Quantidade, Unidade = i.Unidade }).ToList();
+                MessageBox.Show("Receita alterada com sucesso!");
+            }
+            else
             {
                 DataStore.Receitas.Add(new Receita
                 {
@@ -97,14 +114,62 @@ namespace cozinhadonamaria
                     Ingredientes = new List<Ingrediente>(ingredientesReceita)
                 });
                 MessageBox.Show("Receita salva com sucesso!");
-                txtNomeReceita.Clear();
-                ingredientesReceita.Clear();
-                dgvIngredientes.Rows.Clear();
             }
-            else
+
+            LimparFormulario();
+        }
+
+        private void BtnEditarReceita_Click(object? sender, EventArgs e)
+        {
+            if (DataStore.Receitas.Count == 0)
             {
-                MessageBox.Show("Preencha todos os campos e adicione pelo menos um ingrediente.");
+                MessageBox.Show("Nenhuma receita cadastrada.");
+                return;
             }
+
+            var selecao = SelecionarReceitaExistente();
+            if (selecao == null) return;
+
+            receitaEmEdicao = selecao;
+            txtNomeReceita.Text = receitaEmEdicao.Nome;
+            cmbTipoCozinha.SelectedItem = receitaEmEdicao.TipoCozinha;
+            ingredientesReceita = receitaEmEdicao.Ingredientes.Select(i => new Ingrediente { Nome = i.Nome, Quantidade = i.Quantidade, Unidade = i.Unidade }).ToList();
+            RecarregarGridIngredientes();
+        }
+
+        private void BtnExcluirReceita_Click(object? sender, EventArgs e)
+        {
+            if (DataStore.Receitas.Count == 0)
+            {
+                MessageBox.Show("Nenhuma receita cadastrada.");
+                return;
+            }
+
+            var selecao = SelecionarReceitaExistente();
+            if (selecao == null) return;
+
+            if (MessageBox.Show("Confirma exclusão da receita?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                DataStore.Receitas.Remove(selecao);
+                MessageBox.Show("Receita excluída.");
+                if (receitaEmEdicao == selecao) receitaEmEdicao = null;
+                LimparFormulario();
+            }
+        }
+
+        private void RecarregarGridIngredientes()
+        {
+            dgvIngredientes.Rows.Clear();
+            foreach (var ing in ingredientesReceita)
+                dgvIngredientes.Rows.Add(ing.Nome, ing.Quantidade, ing.Unidade);
+        }
+
+        private void LimparFormulario()
+        {
+            txtNomeReceita.Clear();
+            ingredientesReceita.Clear();
+            dgvIngredientes.Rows.Clear();
+            receitaEmEdicao = null;
         }
 
         private class IngredienteListItem
@@ -112,6 +177,38 @@ namespace cozinhadonamaria
             public Ingrediente Item { get; }
             public IngredienteListItem(Ingrediente item) => Item = item;
             public override string ToString() => Item.Nome;
+        }
+
+        private Receita? SelecionarReceitaExistente()
+        {
+            using var dlg = new Form
+            {
+                Text = "Selecionar Receita",
+                StartPosition = FormStartPosition.CenterParent,
+                Size = new System.Drawing.Size(380, 420),
+                MinimizeBox = false,
+                MaximizeBox = false,
+                FormBorderStyle = FormBorderStyle.FixedDialog
+            };
+
+            var list = new ListBox { Dock = DockStyle.Top, Height = 320 };
+            foreach (var r in DataStore.Receitas)
+                list.Items.Add(r);
+            list.DisplayMember = nameof(Receita.Nome);
+
+            var btnOk = new Button { Text = "Confirmar", DialogResult = DialogResult.OK, Left = 180, Top = 340, Width = 80 };
+            var btnCancel = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, Left = 270, Top = 340, Width = 80 };
+
+            dlg.Controls.Add(list);
+            dlg.Controls.Add(btnOk);
+            dlg.Controls.Add(btnCancel);
+            dlg.AcceptButton = btnOk;
+            dlg.CancelButton = btnCancel;
+
+            var result = dlg.ShowDialog(this);
+            if (result == DialogResult.OK && list.SelectedItem is Receita rSel)
+                return rSel;
+            return null;
         }
 
         private List<Ingrediente> SelecionarIngredientes()

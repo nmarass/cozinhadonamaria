@@ -1,0 +1,6 @@
+<Project>
+  <!-- Remove a referência WPF do WebView2 para evitar o conflito MSB3277 de WindowsBase -->
+  <ItemGroup>
+    <Reference Remove="Microsoft.Web.WebView2.Wpf" />
+  </ItemGroup>
+</Project>

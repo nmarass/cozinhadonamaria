@@ -13,6 +13,13 @@ namespace cozinhadonamaria
             btnTipoCozinha.Click += BtnTipoCozinha_Click;
             btnReceita.Click += BtnReceita_Click;
             btnConsultaReceita.Click += BtnConsultaReceita_Click;
+            btnVideoReceita.Click += BtnVideoReceita_Click;
+        }
+
+        private void BtnVideoReceita_Click(object? sender, EventArgs e)
+        {
+            var form = new FormVideoReceita();
+            form.Show();
         }
 
         private void BtnTipoCozinha_Click(object? sender, EventArgs e)
