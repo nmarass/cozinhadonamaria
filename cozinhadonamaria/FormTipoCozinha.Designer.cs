@@ -15,26 +15,17 @@ namespace cozinhadonamaria
             txtTipoCozinha = new TextBox();
             btnSalvar = new Button();
             SuspendLayout();
-            // 
-            // txtTipoCozinha
-            // 
             txtTipoCozinha.Location = new Point(12, 12);
             txtTipoCozinha.Name = "txtTipoCozinha";
             txtTipoCozinha.PlaceholderText = "Tipo de Cozinha";
             txtTipoCozinha.Size = new Size(200, 27);
             txtTipoCozinha.TabIndex = 0;
-            // 
-            // btnSalvar
-            // 
             btnSalvar.Location = new Point(12, 45);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(200, 30);
             btnSalvar.TabIndex = 1;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
-            // 
-            // FormTipoCozinha
-            // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(829, 442);
             Controls.Add(txtTipoCozinha);

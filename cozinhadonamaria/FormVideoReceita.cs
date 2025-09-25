@@ -61,6 +61,13 @@ namespace cozinhadonamaria
 
         private void InitializeComponent()
         {
+            SuspendLayout();
+            // 
+            // FormVideoReceita
+            // 
+            ClientSize = new Size(964, 531);
+            Name = "FormVideoReceita";
+            ResumeLayout(false);
         }
 
         private async void BtnBuscar_Click(object? sender, EventArgs e)
